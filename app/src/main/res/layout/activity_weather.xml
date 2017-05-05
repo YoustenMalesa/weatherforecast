@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="za.co.dvt.weatherforecast.WeatherActivity">
+
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:textColorLink="@android:color/black"
+        android:textIsSelectable="true"
+        android:textSize="30sp"
+        android:layout_marginStart="74dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imgWeatherIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="17dp"
+        android:layout_below="@+id/txtDate"
+        android:layout_alignStart="@+id/txtDate" />
+
+    <TextView
+        android:id="@+id/txtMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_below="@+id/txtDescription"
+        android:layout_alignEnd="@+id/txtDate" />
+
+    <TextView
+        android:id="@+id/txtMinTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_below="@+id/txtMaxTemp"
+        android:layout_alignStart="@+id/txtMaxTemp"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:id="@+id/txtLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColorLink="@android:color/black"
+        android:textSize="24sp"
+        android:layout_below="@+id/txtMinTemp"
+        android:layout_alignStart="@+id/txtMinTemp"
+        android:layout_marginTop="51dp" />
+
+    <ProgressBar
+        android:id="@+id/pgbProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:layout_alignBottom="@+id/imgWeatherIcon"
+        android:layout_toEndOf="@+id/txtDescription" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColorLink="@android:color/black"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/imgWeatherIcon"
+        android:layout_alignStart="@+id/imgWeatherIcon"
+        android:layout_marginStart="25dp" />
+
+</RelativeLayout>
