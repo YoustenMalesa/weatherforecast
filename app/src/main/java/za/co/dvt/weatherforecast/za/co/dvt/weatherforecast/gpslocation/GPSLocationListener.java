@@ -1,6 +1,5 @@
 package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.gpslocation;
 
-
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
