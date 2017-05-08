@@ -63,7 +63,7 @@ public class WeatherActivity extends AppCompatActivity implements OnLocationUpda
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                     PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getApplicationContext(), "Access to your location denied. Please use the search feature", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Access to location denied. Please use the search feature", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -90,7 +90,7 @@ public class WeatherActivity extends AppCompatActivity implements OnLocationUpda
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "Access to your location denied. Please use the search feature", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Access to location denied. Please use the search feature", Toast.LENGTH_LONG).show();
             return;
         }
         mLocationManager.requestLocationUpdates(mLocationManager.getBestProvider(new Criteria(), false),
