@@ -42,6 +42,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
     @Bind(R.id.txtDescription)TextView txtDescription;
     @Bind(R.id.imgWeatherIcon) ImageView imgWeatherIcon;
     @Bind(R.id.pgbProgress) ProgressBar pgProgress;
+    @Bind(R.id.txtTemp) TextView txtTemp;
 
     private LocationManager mLocationManager;
     private static GPSLocationListener mLocationListener;
@@ -126,10 +127,11 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         DateFormat dateFormat = DateFormat.getDateInstance();
         pgProgress.setVisibility(View.INVISIBLE);
 
-        txtMaxTemp.setText(getString(R.string.max_temp) + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_max()))
+        txtMaxTemp.setText(getString(R.string.max_temp) + " " + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_max()))
                 + getString(R.string.celcius));
-        txtMinTemp.setText(getString(R.string.min_temp) + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_min()))
+        txtMinTemp.setText(getString(R.string.min_temp) + " " + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_min()))
                 + getString(R.string.celcius));
+        txtTemp.setText(DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp())) + getString(R.string.celcius));
         txtLocation.setText(pWeather.getName() +", "+  pWeather.getSys().getCountry());
         txtDate.setText(dateFormat.format(new Date()));
         txtDescription.setText(pWeather.getWeather()[0].getDescription());
