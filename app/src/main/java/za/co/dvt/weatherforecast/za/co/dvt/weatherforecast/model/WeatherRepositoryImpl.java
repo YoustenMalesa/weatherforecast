@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter.WeatherPresenter;
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 
 /**
  * Created by YMalesa on 2017/05/09.
@@ -44,7 +45,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                     mWeather = vGson.fromJson(response.toString(), WeatherResponse.class);
 
                     mCallback.onWeatherUpdate(mWeather);
-                    Log.d("WeatherRepositoryImpl", "loadWeather:: Success " + response.toString());
+                    Log.d("WeatherRepositoryImpl", "loadWeather:: Success " + mWeather.toString());
                 }catch (Exception ex) {
                     Log.d("WeatherRepositoryImpl", "loadWeather::" + ex);
                     mCallback.onWeatherUpdate(mWeather);
@@ -77,7 +78,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                     Gson vGson = new Gson();
                     mWeather = vGson.fromJson(response.toString(), WeatherResponse.class);
                     mCallback.onWeatherUpdate(mWeather);
-                    Log.d("WeatherRepositoryImpl", "loadWeather:: Success " + response.toString());
+                    Log.d("WeatherRepositoryImpl", "loadWeather:: Success " + mWeather.toString());
                 }catch (Exception ex) {
                     Log.d("WeatherRepositoryImpl", "loadWeather::" + ex);
                     mCallback.onWeatherUpdate(mWeather);

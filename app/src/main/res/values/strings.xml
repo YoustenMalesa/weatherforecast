@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Weather ForeCast</string>
+    <string name="location_denied_msg">Failed to obtain current location. Allow permissions.</string>
+    <string name="weather_load_error_msg">Failed to load weather</string>
+    <string name="max_temp">MAX</string>
+    <string name="min_temp">MIN</string>
+    <string name="celcius">°C</string>
+    <string name="png">.png</string>
 </resources>

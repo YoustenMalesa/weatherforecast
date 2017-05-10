@@ -1,6 +1,6 @@
 package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.view;
 
-import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.GPSLocationListener;
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;
 
 /**

@@ -2,7 +2,7 @@ package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter;
 
 import com.android.volley.RequestQueue;
 
-import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.GPSLocationListener;
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.WeatherRepository;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.WeatherRepositoryImpl;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;

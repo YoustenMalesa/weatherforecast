@@ -2,6 +2,8 @@ package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model;
 
 import com.android.volley.RequestQueue;
 
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
+
 /**
  * Created by YMalesa on 2017/05/09.
  */

@@ -1,4 +1,4 @@
-package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model;
+package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util;
 
 import android.location.Location;
 import android.location.LocationListener;

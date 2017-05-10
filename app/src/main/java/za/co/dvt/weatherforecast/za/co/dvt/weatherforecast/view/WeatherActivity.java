@@ -21,13 +21,12 @@ import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import za.co.dvt.weatherforecast.R;
-import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.GPSLocationListener;
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter.WeatherPresenter;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter.WeatherPresenterImpl;
@@ -67,13 +66,12 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         pgProgress.setVisibility(View.VISIBLE);
 
         try {
-            if(!checkIsPermissionGranted()) return;
+            if(!checkIsPermissionGranted()){ pgProgress.setVisibility(View.INVISIBLE); return;}
             getCurrentLocation();
 
         } catch (SecurityException ex) {
-            Toast.makeText(getApplicationContext(), "Failed to obtain current location. Allow permissions.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.location_denied_msg), Toast.LENGTH_LONG).show();
         }
-
 
     }
 
@@ -86,7 +84,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!checkIsPermissionGranted()) return;
+        if(!checkIsPermissionGranted()){ pgProgress.setVisibility(View.INVISIBLE); return;}
         getCurrentLocation();
     }
 
@@ -120,7 +118,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
     @Override
     public void showWeatherError() {
         pgProgress.setVisibility(View.INVISIBLE);
-        Toast.makeText(getApplicationContext(), "Failed to load weather", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.weather_load_error_msg), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -128,12 +126,14 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         DateFormat dateFormat = DateFormat.getDateInstance();
         pgProgress.setVisibility(View.INVISIBLE);
 
-        txtMaxTemp.setText("max " + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_max())) + " °C");
-        txtMinTemp.setText("min " + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_min())) + " °C");
+        txtMaxTemp.setText(getString(R.string.max_temp) + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_max()))
+                + getString(R.string.celcius));
+        txtMinTemp.setText(getString(R.string.min_temp) + DegreesConverter.toCelcius(Double.parseDouble(pWeather.getMain().getTemp_min()))
+                + getString(R.string.celcius));
         txtLocation.setText(pWeather.getName() +", "+  pWeather.getSys().getCountry());
         txtDate.setText(dateFormat.format(new Date()));
         txtDescription.setText(pWeather.getWeather()[0].getDescription());
-        Picasso.with(getApplicationContext()).load(OPEN_WEATHER_IMG_URL + pWeather.getWeather()[0].getIcon() + ".png").into(imgWeatherIcon);
+        Picasso.with(getApplicationContext()).load(OPEN_WEATHER_IMG_URL + pWeather.getWeather()[0].getIcon() + getString(R.string.png)).into(imgWeatherIcon);
     }
 
     @Override
