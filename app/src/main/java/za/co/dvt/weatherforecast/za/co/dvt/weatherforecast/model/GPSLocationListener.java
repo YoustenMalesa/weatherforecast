@@ -1,17 +1,19 @@
-package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.gpslocation;
+package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model;
 
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.view.WeatherView;
+
 public class GPSLocationListener implements LocationListener {
     private double mLatitude;
     private double mLongitude;
-    private OnLocationUpdateListener mLocationUpdateListener;
+    private WeatherView mView;
 
-    public GPSLocationListener(OnLocationUpdateListener pOnLocationListener) {
-        mLocationUpdateListener = pOnLocationListener;
+    public GPSLocationListener(WeatherView pView) {
+        mView = pView;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class GPSLocationListener implements LocationListener {
             mLatitude = location.getLatitude();
             mLongitude = location.getLongitude();
 
-            mLocationUpdateListener.onUpdate();
+            mView.onLocationUpdate(this);
 
         } else {
             Log.d("GPSLocationListener", "No location available");
