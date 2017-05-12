@@ -1,18 +1,20 @@
 package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter;
 
-import com.android.volley.RequestQueue;
+import android.util.Log;
 
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.WeatherRepository;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.WeatherRepositoryImpl;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.view.WeatherView;
 
-/**
- * Created by YMalesa on 2017/05/09.
- */
-
 public class WeatherPresenterImpl implements WeatherPresenter {
+    private final String TAG = "WeatherPresenterImpl";
     private WeatherView mView;
     private WeatherRepository mWeatherRepository;
 
@@ -22,17 +24,57 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     }
 
     @Override
-    public void loadWeather(GPSLocationListener pLocation, RequestQueue pRequestQueue) {
-        mWeatherRepository.loadWeather(pLocation, pRequestQueue);
+    public void loadWeather(GPSLocationListener pLocation) {
+        try {
+            mWeatherRepository.loadWeather(pLocation, new Callback<WeatherResponse>() {
+                @Override
+                public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                    Log.d(TAG, "onResponse::" + response.toString());
+                    if (response.isSuccessful()) {
+                        mView.showWeather(response.body());
+                    }else {
+                        mView.showWeatherError();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                    Log.d(TAG, "onFailure:: " + t.getStackTrace());
+                    mView.showWeatherError();
+                }
+            });
+        }catch (IOException ex) {
+            Log.d(TAG, "onFailure:: " + ex.getStackTrace());
+            mView.showWeatherError();
+        }
+
     }
 
     @Override
-    public void loadWeather(String pCity, RequestQueue pRequestQueue) {
-        mWeatherRepository.loadWeather(pCity, pRequestQueue);
+    public void loadWeather(String pCity) {
+        try {
+            mWeatherRepository.loadWeather(pCity, new Callback<WeatherResponse>() {
+                @Override
+                public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                    Log.d(TAG, "onResponse::" + response.toString());
+                    if (response.isSuccessful()) {
+                        mView.showWeather(response.body());
+                    }else {
+                        mView.showWeatherError();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                    Log.d(TAG, "onFailure:: " + t.getStackTrace());
+                    mView.showWeatherError();
+                }
+            });
+        }catch (IOException ex) {
+            Log.d(TAG, "onFailure:: " + ex.getStackTrace());
+            mView.showWeatherError();
+        }
+
     }
 
-    @Override
-    public void onWeatherUpdate(WeatherResponse pWeather) {
-        if(pWeather == null) mView.showWeatherError(); else mView.showWeather(pWeather);
-    }
 }

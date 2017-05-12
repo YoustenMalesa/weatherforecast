@@ -16,8 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -45,12 +43,11 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
     @Bind(R.id.txtTemp) TextView txtTemp;
 
     private LocationManager mLocationManager;
-    private static GPSLocationListener mLocationListener;
+    private GPSLocationListener mLocationListener;
 
     private static final String[] FINE_LOCATION_PERMISSION = {Manifest.permission.ACCESS_FINE_LOCATION};
     private static final int FINE_LOATION_REQUEST = 1337;
 
-    private RequestQueue mRequestQueue;
     private static final String OPEN_WEATHER_IMG_URL = "http://openweathermap.org/img/w/";
 
     private WeatherPresenter mWeatherPresenter;
@@ -62,7 +59,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         ButterKnife.bind(this);
         mWeatherPresenter = new WeatherPresenterImpl(this);
         mLocationListener = new GPSLocationListener(this);
-        mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         requestPermissions(FINE_LOCATION_PERMISSION, FINE_LOATION_REQUEST);
         pgProgress.setVisibility(View.VISIBLE);
 
@@ -98,7 +94,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mWeatherPresenter.loadWeather(query, mRequestQueue);
+                mWeatherPresenter.loadWeather(query);
                 return false;
             }
 
@@ -112,8 +108,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
 
     @Override
     public void onLocationUpdate(GPSLocationListener pLocation) {
-       mWeatherPresenter.loadWeather(pLocation, mRequestQueue);
-
+       mWeatherPresenter.loadWeather(pLocation);
     }
 
     @Override
