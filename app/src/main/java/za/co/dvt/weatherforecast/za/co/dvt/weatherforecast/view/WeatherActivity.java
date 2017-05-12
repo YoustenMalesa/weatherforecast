@@ -58,9 +58,15 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
         mWeatherPresenter = new WeatherPresenterImpl(this);
-        mLocationListener = new GPSLocationListener(this);
         requestPermissions(FINE_LOCATION_PERMISSION, FINE_LOATION_REQUEST);
         pgProgress.setVisibility(View.VISIBLE);
+
+        mLocationListener = new GPSLocationListener(new OnWeatherUpdateCallback() {
+            @Override
+            public void onLocationUpdate(GPSLocationListener pLocation) {
+                mWeatherPresenter.loadWeather(pLocation);
+            }
+        });
 
         try {
             if(!checkIsPermissionGranted()){ pgProgress.setVisibility(View.INVISIBLE); return;}
@@ -104,11 +110,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherView {
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onLocationUpdate(GPSLocationListener pLocation) {
-       mWeatherPresenter.loadWeather(pLocation);
     }
 
     @Override

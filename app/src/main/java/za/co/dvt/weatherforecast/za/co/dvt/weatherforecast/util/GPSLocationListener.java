@@ -5,15 +5,16 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 
+import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.view.OnWeatherUpdateCallback;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.view.WeatherView;
 
 public class GPSLocationListener implements LocationListener {
     private double mLatitude;
     private double mLongitude;
-    private WeatherView mView;
+    private OnWeatherUpdateCallback mCallback;
 
-    public GPSLocationListener(WeatherView pView) {
-        mView = pView;
+    public GPSLocationListener(OnWeatherUpdateCallback pCallback) {
+        mCallback = pCallback;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class GPSLocationListener implements LocationListener {
             mLatitude = location.getLatitude();
             mLongitude = location.getLongitude();
 
-            mView.onLocationUpdate(this);
+            mCallback.onLocationUpdate(this);
 
         } else {
             Log.d("GPSLocationListener", "No location available");

@@ -20,7 +20,7 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     public WeatherPresenterImpl(WeatherView pView) {
         mView = pView;
-        mWeatherRepository = new WeatherRepositoryImpl(this);
+        mWeatherRepository = new WeatherRepositoryImpl();
     }
 
     @Override
@@ -39,12 +39,12 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
                 @Override
                 public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                    Log.d(TAG, "onFailure:: " + t.getStackTrace());
+                    Log.e(TAG, "onFailure:: " + t);
                     mView.showWeatherError();
                 }
             });
         }catch (IOException ex) {
-            Log.d(TAG, "onFailure:: " + ex.getStackTrace());
+            Log.e(TAG, "onFailure:: " + ex);
             mView.showWeatherError();
         }
 
@@ -66,12 +66,12 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
                 @Override
                 public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                    Log.d(TAG, "onFailure:: " + t.getStackTrace());
+                    Log.e(TAG, "onFailure:: " + t);
                     mView.showWeatherError();
                 }
             });
         }catch (IOException ex) {
-            Log.d(TAG, "onFailure:: " + ex.getStackTrace());
+            Log.e(TAG, "onFailure:: " + ex);
             mView.showWeatherError();
         }
 

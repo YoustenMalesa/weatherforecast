@@ -1,8 +1,5 @@
 package za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model;
 
-
-import com.android.volley.RequestQueue;
-
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
@@ -11,20 +8,16 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.model.dto.WeatherResponse;
-import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.presenter.WeatherPresenter;
 import za.co.dvt.weatherforecast.za.co.dvt.weatherforecast.util.GPSLocationListener;
 
 public class WeatherRepositoryImpl implements WeatherRepository {
-    private RequestQueue mRequestQueue;
     private WeatherResponse mWeather = null;
-    private WeatherPresenter mCallback;
     private Retrofit mRetrofit;
     private final GsonConverterFactory mGsonConverterFactory = GsonConverterFactory.create();
     private final OkHttpClient mHttpClient = new OkHttpClient();
     private OpenWeatherAPIService mService;
 
-    public WeatherRepositoryImpl(WeatherPresenter pCallback) {
-        mCallback = pCallback;
+    public WeatherRepositoryImpl() {
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(WeatherRepository.OPEN_WEATHER_END_POINT)

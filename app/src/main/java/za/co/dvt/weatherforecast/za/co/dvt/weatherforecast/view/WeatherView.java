@@ -14,6 +14,4 @@ public interface WeatherView {
     void getCurrentLocation() throws SecurityException;
     boolean checkIsPermissionGranted();
 
-    void onLocationUpdate(GPSLocationListener pLocation);
-
 }
